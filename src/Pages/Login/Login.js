@@ -8,14 +8,19 @@ export default function Login() {
     signInUser(e.target.email.value, e.target.password.value);
   };
   return (
-    <div className="  min-h-screen w-full flex  flex-col justify-center items-center">
-      <h1 className=" font-bold text-4xl text-center my-4 text-slate-600">
-        Login Form
-      </h1>
-      <div className=" max-w-[400px] max-h-[400px] border bg-slate-100">
+    <div
+      className="  min-h-screen w-full flex flex-col md:flex-row  justify-center items-center  "
+      style={{ backgroundColor: "#F6F6F6" }}
+    >
+      <div className=" max-w-[500px]">
+        <h1 className=" font-bold text-2xl text-center  text-slate-600 p-8 uppercase md:text-4xl">
+          Login to update your profile
+        </h1>
+      </div>
+      <div className="  max-w-[400px] max-h-[400px] border border-slate-300 bg-slate-100">
         <form
           onSubmit={handleLogin}
-          className="p-4 h-full border text-center  bg-white m-8"
+          className="p-4 h-full border text-center border-slate-300  bg-white m-8"
         >
           <img src="https://www.careinsurance.com/upload_master/media/posts/June2020/IQKrrYI3nqo0i9PNqO7W.jpg" />
           <div className="">

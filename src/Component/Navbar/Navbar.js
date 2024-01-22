@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BiDonateBlood } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
 export default function Navbar() {
+  const { user, isLoading, signOutUser } = useContext(AuthContext);
+
+  console.log(user, isLoading);
   return (
     <div>
       <div className="navbar bg-base-100 shadow">
@@ -73,12 +77,15 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <a
-            className="btn"
-            style={{ color: "white", backgroundColor: "rgb(198, 65, 76)" }}
-          >
-            Button
-          </a>
+          {user && (
+            <button
+              onClick={signOutUser}
+              className="btn"
+              style={{ color: "white", backgroundColor: "rgb(198, 65, 76)" }}
+            >
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </div>

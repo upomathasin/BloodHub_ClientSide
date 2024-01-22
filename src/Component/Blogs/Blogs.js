@@ -26,12 +26,12 @@ export default function Blogs() {
     <div className="p-10">
       <div>
         {" "}
-        <h1 className="text-5xl text-center">Blogs</h1>
+        <h1 className="text-5xl text-center uppercase">Blogs</h1>
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-3  gap-4 my-10">
         {Blogs.map((blog) => {
           return (
-            <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card w-96 bg-base-100 shadow-xl rounded-none border ">
               <figure>
                 <img src={blog.img} alt="" />
               </figure>
