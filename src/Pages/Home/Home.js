@@ -5,6 +5,7 @@ import Blogs from "../../Component/Blogs/Blogs";
 import QouteSection from "../../Component/QouteSection/QouteSection";
 import Services from "../../Component/Services/Services";
 import ParalaxSection from "../../Component/ParalaxSection/ParalaxSection";
+import FrequentQuestion from "../../Component/FrequentQuestion/FrequentQuestion";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
       <Blogs></Blogs>
       <ParalaxSection></ParalaxSection>
 
-      <QouteSection></QouteSection>
+      <FrequentQuestion></FrequentQuestion>
     </div>
   );
 }

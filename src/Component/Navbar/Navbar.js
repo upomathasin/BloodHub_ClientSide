@@ -37,6 +37,11 @@ export default function Navbar() {
               <li>
                 <Link to="/findDonors">Find Donors</Link>
               </li>
+              {user && (
+                <li>
+                  <Link to="/userProfile/:email">Your Profile</Link>
+                </li>
+              )}
 
               <li>
                 <Link to="register">Register</Link>
@@ -61,6 +66,11 @@ export default function Navbar() {
             <li>
               <Link to="/">Home</Link>
             </li>
+            {user && (
+              <li>
+                <Link to="/userProfile/:email">Your Profile</Link>
+              </li>
+            )}
             <li>
               <Link to="/findDonors">Find Donors</Link>
             </li>

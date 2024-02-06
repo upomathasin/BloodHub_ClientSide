@@ -6,6 +6,7 @@ import Donors from "../Pages/Donors/Donors";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Main from "../Layouts/Main/Main";
+import UserProfile from "../Pages/UserProfile/UserProfile";
 
 export default function Routes({ children }) {
   const routes = createBrowserRouter([
@@ -32,6 +33,10 @@ export default function Routes({ children }) {
         {
           path: "/register",
           element: <Register></Register>,
+        },
+        {
+          path: "/userProfile/:email",
+          element: <UserProfile></UserProfile>,
         },
       ],
     },

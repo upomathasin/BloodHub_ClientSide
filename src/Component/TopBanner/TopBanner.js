@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function TopBanner() {
+  useEffect(() => {
+    AOS.init({ duration: 3000 });
+  }, []);
+
   return (
     <div
       className="hero min-h-screen"
@@ -9,7 +15,7 @@ export default function TopBanner() {
     >
       <div className="hero-overlay bg-opacity-50"></div>
       <div className="hero-content text-center text-neutral-content">
-        <div className="max-w-md">
+        <div className="max-w-md" data-aos="zoom-in">
           <h1 className="mb-5 text-5xl  text-white">
             Donate Your <span style={{ color: "rgb(198, 65, 76)" }}>Blood</span>{" "}
             to Us, Save More Life Together

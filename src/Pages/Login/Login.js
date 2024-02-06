@@ -1,11 +1,39 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const { signInUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
-    signInUser(e.target.email.value, e.target.password.value);
+    signInUser(e.target.email.value, e.target.password.value)
+      .then((userCredential) => {
+        console.log(userCredential.user);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Login Successful !",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        navigate(`/userProfile/${userCredential.user.email}`, {
+          state: { uid: userCredential.user.uid },
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `${err.message}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      });
   };
   return (
     <div
