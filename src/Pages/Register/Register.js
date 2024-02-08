@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import app from "../../firebase/firebase.config";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
 import Swal from "sweetalert2";
 import { json } from "react-router-dom";
@@ -12,6 +11,7 @@ export default function Register() {
       name: e.target.name.value,
       email: e.target.email.value,
       phone: e.target.phone.value,
+      location: e.target.location.value,
       blood: e.target.group.value,
       available: e.target.available.checked,
     };
@@ -66,24 +66,34 @@ export default function Register() {
               className="w-full border p-2 my-2 rounded-sm"
               name="name"
             />
-            <input
-              type="email"
-              placeholder="Enter Email"
-              className="w-full border p-2 my-2 rounded-sm"
-              name="email"
-            />
-            <input
-              name="password"
-              type="password"
-              placeholder="Enter Password"
-              className="w-full border p-2 my-2 rounded-sm"
-            />
-            <input
-              name="phone"
-              type="text"
-              placeholder="Enter Phone Number"
-              className="w-full border p-2 my-2 rounded-sm"
-            />
+            <div className="flex">
+              <input
+                type="email"
+                placeholder="Enter Email"
+                className="w-full border p-2 my-2 rounded-sm me-2"
+                name="email"
+              />
+              <input
+                name="password"
+                type="password"
+                placeholder="Enter Password"
+                className="w-full border p-2 my-2 rounded-sm"
+              />
+            </div>
+            <div className="flex ">
+              <input
+                name="phone"
+                type="text"
+                placeholder="Enter Phone Number"
+                className="w-full border p-2 my-2 rounded-sm me-2"
+              />
+              <input
+                name="location"
+                type="text"
+                placeholder="Enter Location"
+                className="w-full border p-2 my-2 rounded-sm"
+              />
+            </div>
             <select
               name="group"
               className="select select-bordered rounded-none w-full "

@@ -26,7 +26,7 @@ export default function Services() {
           <h2 className="card-title">Donate Blood</h2>
           <p></p>
           <div className="card-actions justify-end"></div>
-        </div>
+        </div>+
       </div>
       <div
         data-aos="zoom-in"

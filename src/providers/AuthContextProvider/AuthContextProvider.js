@@ -19,10 +19,14 @@ export default function AuthContextProvider({ children }) {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
   const signInUser = async (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);

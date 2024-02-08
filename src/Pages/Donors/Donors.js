@@ -3,21 +3,46 @@ import { IoSearchCircle } from "react-icons/io5";
 
 export default function Donors() {
   const [users, setUsers] = useState([]);
+  const [searchedTerm, setSearchedTerm] = useState("");
   useEffect(() => {
     fetch("http://localhost:5000/users")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
+
+  const handleSearch = (e) => {
+    // const newUser = users.filter((user) => {
+    //   return user.blood.includes(e.target.blood.value);
+    // });
+    setSearchedTerm(e.target.value);
+  };
   return (
     <div>
-      <div className=" bg-slate-800  w-full h-[300px] flex justify-center items-center">
-        <IoSearchCircle className="text-7xl text-red-500" />
-        <h1 className="text-7xl text-red-500"> Find Donors</h1>
+      <div
+        style={{
+          backgroundImage: `url(https://hsiassetstorage.sfo2.digitaloceanspaces.com/assets/images/blog/_1200x630_crop_center-center_none/Blood-Donor-Month.png)`,
+        }}
+        className="bg-cover bg-fixed w-full h-[400px] flex flex-col justify-center items-center"
+      >
+        <div className=" bg-slate-900 w-full  bg-opacity-40 p-10  mx-8">
+          <h1 className=" text-center text-7xl text-red-500">
+            {" "}
+            Find Blood Donors
+          </h1>
+          <div className="flex justify-center items-center mt-3">
+            <IoSearchCircle className="text-7xl text-red-500" />
+            <input
+              type="text"
+              placeholder="Search Donor By Blood Group ..."
+              className="input input-bordered input-error w-full max-w-xs"
+              onChange={handleSearch}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="overflow-x-auto border m-12">
         <table className="table">
-          {/* head */}
           <thead>
             <tr>
               <th>
@@ -26,39 +51,43 @@ export default function Donors() {
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
-              <th>Status</th>
+              <th>Location</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
 
-            {users.map((user) => (
-              <tr>
-                <th>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar placeholder">
-                      <div className="bg-red-400 text-neutral-content rounded-sm w-12">
-                        <span className="text-xl">{user.blood}</span>
+            {users
+              .filter((user) => user.blood.toLowerCase().includes(searchedTerm))
+              .map((user) => (
+                <tr>
+                  <th>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar placeholder">
+                        <div className="bg-red-400 text-white rounded-sm w-12">
+                          <span className="text-xl">{user.blood}</span>
+                        </div>
                       </div>
+                      <div></div>
                     </div>
-                    <div></div>
-                  </div>
-                </th>
+                  </th>
 
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <th>
-                  <button
-                    className={`btn ${
-                      user.available ? "bg-green-400" : "btn-error"
-                    } btn-xs`}
-                  >
-                    {`${user.available ? "Available" : "Not Available"}`}
-                  </button>
-                </th>
-              </tr>
-            ))}
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone}</td>
+                  <th>
+                    <button
+                      className={` text-xl ${
+                        user.available ? "text-green-400" : "text-slate-500"
+                      } btn-xs`}
+                    >
+                      {`${
+                        user.available ? ` ${user.location}` : "Not Available"
+                      }`}
+                    </button>
+                  </th>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

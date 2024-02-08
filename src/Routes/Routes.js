@@ -7,6 +7,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Main from "../Layouts/Main/Main";
 import UserProfile from "../Pages/UserProfile/UserProfile";
+import UserPrivateRoute from "../Component/UserPrivateRoute/UserPrivateRoute";
 
 export default function Routes({ children }) {
   const routes = createBrowserRouter([
@@ -36,7 +37,11 @@ export default function Routes({ children }) {
         },
         {
           path: "/userProfile/:email",
-          element: <UserProfile></UserProfile>,
+          element: (
+            <UserPrivateRoute>
+              <UserProfile></UserProfile>,
+            </UserPrivateRoute>
+          ),
         },
       ],
     },
