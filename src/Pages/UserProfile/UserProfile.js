@@ -8,16 +8,10 @@ export default function UserProfile() {
   const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
-    const getUserProfile = () => {
-      fetch(`http://localhost:5000/users/${user.email}`)
-        .then((res) => res.json())
-        .then((data) => setUserProfile(data));
-    };
-
-    if (user) {
-      getUserProfile();
-    }
-  }, [userProfile]);
+    fetch(`http://localhost:5000/users/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setUserProfile(data));
+  }, []);
   return (
     <div>
       {userProfile && (
@@ -42,6 +36,10 @@ export default function UserProfile() {
               <p className="pt-4 pb-1">
                 Blood Group:
                 <span className=" ms-1 text-red-400">{userProfile.blood}</span>
+              </p>
+              <p className="py-1">
+                Last Blood Donation Date:
+                <span className=" ms-1 ">{userProfile.lastDonate}</span>
               </p>
               <p className="py-1">
                 Email:
@@ -89,6 +87,15 @@ export default function UserProfile() {
                       placeholder="Enter Location"
                       className="w-full border p-2 my-2 rounded-sm"
                       defaultValue={userProfile.location}
+                    />
+                    <br />
+                    <label>Your Last Blood Donation Date ("YYYY-MM-DD")</label>
+                    <input
+                      name="u_date"
+                      type="text"
+                      className="w-full border p-2 my-2 rounded-sm"
+                      placeholder="YYYY-MM-DD"
+                      defaultValue={userProfile.lastDonate}
                     />
                     <br />
                     <label>Your Phone Number:</label>

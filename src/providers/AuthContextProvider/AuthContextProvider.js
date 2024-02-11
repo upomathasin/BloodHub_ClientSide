@@ -15,6 +15,7 @@ export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
 
   const createUser = async (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -29,6 +30,7 @@ export default function AuthContextProvider({ children }) {
     };
   }, []);
   const signInUser = async (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   const signOutUser = () => {

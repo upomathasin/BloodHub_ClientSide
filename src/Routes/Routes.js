@@ -8,6 +8,7 @@ import Register from "../Pages/Register/Register";
 import Main from "../Layouts/Main/Main";
 import UserProfile from "../Pages/UserProfile/UserProfile";
 import UserPrivateRoute from "../Component/UserPrivateRoute/UserPrivateRoute";
+import RequestBlood from "../Pages/RequestBlood/RequestBlood";
 
 export default function Routes({ children }) {
   const routes = createBrowserRouter([
@@ -35,6 +36,11 @@ export default function Routes({ children }) {
           path: "/register",
           element: <Register></Register>,
         },
+        {
+          path: "/requestBlood",
+          element: <RequestBlood></RequestBlood>,
+        },
+
         {
           path: "/userProfile/:email",
           element: (

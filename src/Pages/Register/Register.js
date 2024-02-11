@@ -14,6 +14,7 @@ export default function Register() {
       location: e.target.location.value,
       blood: e.target.group.value,
       available: e.target.available.checked,
+      lastDonate: e.target.lastDonate.value,
     };
 
     console.log(newUser);
@@ -94,9 +95,20 @@ export default function Register() {
                 className="w-full border p-2 my-2 rounded-sm"
               />
             </div>
+            <div className="flex justify-between items-center my-2  ">
+              <label className="w-full p-1 me-2 rounded-sm border">
+                Last Donation Date :{" "}
+              </label>
+              <input
+                name="lastDonate"
+                type="date"
+                className="w-full border p-1   rounded-sm"
+                placeholder="date"
+              />
+            </div>
             <select
               name="group"
-              className="select select-bordered rounded-none w-full "
+              className="select select-bordered rounded-none w-full my-2 "
             >
               <option disabled selected>
                 Blood Group
@@ -111,7 +123,7 @@ export default function Register() {
             </select>
           </div>
 
-          <div className="form-control w-full  p-2 my-2 ">
+          <div className="form-control w-full  p-2  ">
             <label className="cursor-pointer label">
               <span className="label-text">Available to donate blood</span>
               <input
@@ -123,6 +135,7 @@ export default function Register() {
               />
             </label>
           </div>
+
           <button
             className="btn btn-sm my-3"
             style={{ color: "white", backgroundColor: "rgb(198, 65, 76)" }}

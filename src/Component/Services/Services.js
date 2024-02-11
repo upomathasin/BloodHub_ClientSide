@@ -11,7 +11,7 @@ export default function Services() {
   return (
     <div
       style={{ backgroundColor: "rgb(198, 65, 74)" }}
-      className="grid   grid-cols-1 lg:grid-cols-3 justify-center items-center p-12"
+      className="grid grid-cols-1 justify-center items-center gap-4 p-8 md:grid-cols-3   "
     >
       <div
         data-aos="zoom-in"
@@ -26,7 +26,7 @@ export default function Services() {
           <h2 className="card-title">Donate Blood</h2>
           <p></p>
           <div className="card-actions justify-end"></div>
-        </div>+
+        </div>
       </div>
       <div
         data-aos="zoom-in"

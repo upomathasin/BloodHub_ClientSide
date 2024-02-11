@@ -37,7 +37,7 @@ export default function Login() {
   };
   return (
     <div
-      className="  min-h-screen w-full flex flex-col md:flex-row  justify-center items-center  "
+      className="min-h-screen w-full flex flex-col md:flex-row  justify-center items-center  "
       style={{ backgroundColor: "#F6F6F6" }}
     >
       <div className=" max-w-[500px]">

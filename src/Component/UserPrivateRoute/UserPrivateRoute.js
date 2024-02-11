@@ -3,6 +3,11 @@ import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProv
 
 export default function UserPrivateRoute({ children }) {
   const { user, isLoading } = useContext(AuthContext);
+
+  if (user) {
+    return children;
+  }
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-base-200 flex justify-center items-center">
@@ -12,9 +17,6 @@ export default function UserPrivateRoute({ children }) {
         <span className="loading loading-bars loading-lg"></span>
       </div>
     );
-  }
-  if (user) {
-    return children;
   } else {
     alert("Please Login !");
   }

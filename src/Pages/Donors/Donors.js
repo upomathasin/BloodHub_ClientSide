@@ -4,6 +4,7 @@ import { IoSearchCircle } from "react-icons/io5";
 export default function Donors() {
   const [users, setUsers] = useState([]);
   const [searchedTerm, setSearchedTerm] = useState("");
+  const [showAllusers, setShowAllUsers] = useState(true);
   useEffect(() => {
     fetch("http://localhost:5000/users")
       .then((res) => res.json())
@@ -11,9 +12,6 @@ export default function Donors() {
   }, []);
 
   const handleSearch = (e) => {
-    // const newUser = users.filter((user) => {
-    //   return user.blood.includes(e.target.blood.value);
-    // });
     setSearchedTerm(e.target.value);
   };
   return (
@@ -29,8 +27,8 @@ export default function Donors() {
             {" "}
             Find Blood Donors
           </h1>
+
           <div className="flex justify-center items-center mt-3">
-            <IoSearchCircle className="text-7xl text-red-500" />
             <input
               type="text"
               placeholder="Search Donor By Blood Group ..."
@@ -41,7 +39,29 @@ export default function Donors() {
         </div>
       </div>
 
-      <div className="overflow-x-auto border m-12">
+      <div>
+        <div role="tablist" className="tabs tabs-bordered">
+          <a role="tab" className="tab">
+            <button
+              onClick={() => setShowAllUsers(true)}
+              className="text-red-400"
+            >
+              All Users
+            </button>
+          </a>
+
+          <a role="tab" className="tab ">
+            <button
+              className="text-red-400"
+              onClick={() => setShowAllUsers(false)}
+            >
+              Donor who don't donate blood within 3 months?
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto border m-12 ">
         <table className="table">
           <thead>
             <tr>
@@ -51,6 +71,7 @@ export default function Donors() {
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
+              <th>Last Donate</th>
               <th>Location</th>
             </tr>
           </thead>
@@ -58,7 +79,20 @@ export default function Donors() {
             {/* row 1 */}
 
             {users
-              .filter((user) => user.blood.toLowerCase().includes(searchedTerm))
+              .filter((user) => {
+                if (showAllusers) {
+                  return user.blood.toLowerCase().includes(searchedTerm);
+                } else {
+                  let today = new Date();
+                  let threeMonAgo = new Date();
+                  threeMonAgo.setMonth(today.getMonth() - 3);
+                  let donationDate = new Date(user.lastDonate);
+
+                  if (donationDate >= threeMonAgo) {
+                    return user.blood.toLowerCase().includes(searchedTerm);
+                  }
+                }
+              })
               .map((user) => (
                 <tr>
                   <th>
@@ -75,10 +109,11 @@ export default function Donors() {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>{user.phone}</td>
+                  <td>{user.lastDonate}</td>
                   <th>
                     <button
                       className={` text-xl ${
-                        user.available ? "text-green-400" : "text-slate-500"
+                        user.available ? "text-slate-400" : "text-slate-500"
                       } btn-xs`}
                     >
                       {`${
