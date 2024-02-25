@@ -1,17 +1,41 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
-import { useLocation } from "react-router-dom";
+import { json, useLocation } from "react-router-dom";
 import { FaUserEdit } from "react-icons/fa";
 export default function UserProfile() {
   const { user } = useContext(AuthContext);
 
   const [userProfile, setUserProfile] = useState(null);
-
+  const [updatedProfile, setUpdatedProfile] = useState(userProfile);
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
-      .then((res) => res.json())
-      .then((data) => setUserProfile(data));
+    try {
+      fetch(`http://localhost:5000/users/${user.email}`)
+        .then((res) => res.json())
+        .then((data) => setUserProfile(data));
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
+
+  const handleUpdate = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(e.target.name, e.target.value);
+    setUpdatedProfile({ ...userProfile, [name]: value });
+  };
+
+  const handleUpdateSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(updatedProfile);
+    fetch(`http://localhost:5000/users/${user.email}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(updatedProfile),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
   return (
     <div>
       {userProfile && (
@@ -76,13 +100,15 @@ export default function UserProfile() {
                       type="text"
                       placeholder="Enter Name"
                       className=" w-full border p-2 my-2 rounded-sm"
-                      name="u_name"
+                      name="name"
+                      onChange={handleUpdate}
                       defaultValue={userProfile.name}
                     />
                     <br />
                     <label>Your Location:</label>
                     <input
-                      name="u_location"
+                      name="location"
+                      onChange={handleUpdate}
                       type="text"
                       placeholder="Enter Location"
                       className="w-full border p-2 my-2 rounded-sm"
@@ -91,7 +117,8 @@ export default function UserProfile() {
                     <br />
                     <label>Your Last Blood Donation Date ("YYYY-MM-DD")</label>
                     <input
-                      name="u_date"
+                      name="lastDonate"
+                      onChange={handleUpdate}
                       type="text"
                       className="w-full border p-2 my-2 rounded-sm"
                       placeholder="YYYY-MM-DD"
@@ -100,7 +127,8 @@ export default function UserProfile() {
                     <br />
                     <label>Your Phone Number:</label>
                     <input
-                      name="u_phone"
+                      name="phone"
+                      onChange={handleUpdate}
                       type="text"
                       placeholder="Enter Location"
                       className="w-full border p-2 my-2 rounded-sm"
@@ -123,7 +151,10 @@ export default function UserProfile() {
                     </div>
                     <div className="flex justify-center">
                       {" "}
-                      <button className="btn btn-sm my-3  bg-slate-700 rounded-none text-white">
+                      <button
+                        onClick={handleUpdateSubmit}
+                        className="btn btn-sm my-3  bg-slate-700 rounded-none text-white"
+                      >
                         Update
                       </button>
                     </div>

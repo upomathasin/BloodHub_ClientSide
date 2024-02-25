@@ -48,7 +48,7 @@ export default function Services() {
           style={{ color: "rgb(198, 65, 76)" }}
         ></MdMedicalServices>
         <div className="card-body">
-          <h2 className="card-title">Donate Blood</h2>
+          <h2 className="card-title">Emergency support</h2>
           <p></p>
           <div className="card-actions justify-end"></div>
         </div>

@@ -12,7 +12,7 @@ export default function Donors() {
   }, []);
 
   const handleSearch = (e) => {
-    setSearchedTerm(e.target.value);
+    setSearchedTerm(e.target.value.toLowerCase());
   };
   return (
     <div>

@@ -2,10 +2,12 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useAdmin from "../../hooks/useAdmin";
 
 export default function Login() {
   const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [isAdmin] = useAdmin();
   const handleLogin = (e) => {
     e.preventDefault();
     signInUser(e.target.email.value, e.target.password.value)
@@ -20,6 +22,7 @@ export default function Login() {
           timer: 1500,
         });
 
+        console.log("isAdmin", isAdmin);
         navigate(`/userProfile/${userCredential.user.email}`, {
           state: { uid: userCredential.user.uid },
         });

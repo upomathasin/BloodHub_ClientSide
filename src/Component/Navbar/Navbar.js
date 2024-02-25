@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { BiDonateBlood } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
+import useAdmin from "../../hooks/useAdmin";
 export default function Navbar() {
   const { user, isLoading, signOutUser } = useContext(AuthContext);
-
+  const [isAdmin] = useAdmin();
   console.log(user, isLoading);
   return (
     <div>
@@ -41,18 +42,35 @@ export default function Navbar() {
               <li>
                 <Link to="/requestBlood">Request Blood</Link>
               </li>
-              {user && (
+              {user && !isAdmin && (
                 <li>
                   <Link to="/userProfile/:email">Your Profile</Link>
                 </li>
               )}
 
-              <li>
-                <Link to="register">Register</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
+              {!user && (
+                <div className="flex ">
+                  {" "}
+                  <li>
+                    <Link to="register">Register</Link>
+                  </li>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                </div>
+              )}
+              {user && isAdmin && (
+                <li>
+                  <Link to="/adminDash"> Admin Dash</Link>
+                </li>
+              )}
+
+              {user && !isAdmin && (
+                <li>
+                  <Link to="/userDash"> User Dash</Link>
+                </li>
+              )}
+
               <li>
                 <Link to="/about">About Us</Link>
               </li>
@@ -70,7 +88,7 @@ export default function Navbar() {
             <li>
               <Link to="/">Home</Link>
             </li>
-            {user && (
+            {user && !isAdmin && (
               <li>
                 <Link to="/userProfile/:email">Your Profile</Link>
               </li>
@@ -82,12 +100,28 @@ export default function Navbar() {
             <li>
               <Link to="/requestBlood">Request Blood</Link>
             </li>
-            <li>
-              <Link to="register">Register</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
+            {user && isAdmin && (
+              <li>
+                <Link to="/adminDash"> Admin Dash</Link>
+              </li>
+            )}
+
+            {user && !isAdmin && (
+              <li>
+                <Link to="/userDash"> User Dash</Link>
+              </li>
+            )}
+
+            {!user && (
+              <div className="flex">
+                <li>
+                  <Link to="register">Register</Link>
+                </li>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              </div>
+            )}
             <li>
               <Link to="/about">About Us</Link>
             </li>

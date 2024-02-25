@@ -8,8 +8,10 @@ export default function RequestBlood() {
     phone: "",
   });
 
-  const handleBloodRequest = (e) => {
-    e.preventDefault();
+  const handleRequestChange = (e) =>{
+
+
+    
   };
 
   return (
@@ -32,12 +34,14 @@ export default function RequestBlood() {
                 type="date"
                 className="w-full border p-2   rounded-sm"
                 placeholder="date"
+                onChange={handleRequestChange}
               />
             </div>
             <div className="form-control">
               <select
                 name="blood"
                 className="select select-bordered rounded-none w-full my-2 "
+                onChange={handleRequestChange}
               >
                 <option disabled selected>
                   Blood Group
@@ -58,6 +62,7 @@ export default function RequestBlood() {
                 type="text"
                 className="w-full border p-2 rounded-sm"
                 placeholder="Address "
+                onChange={handleRequestChange}
               />
             </div>
             <div className="form-control">
@@ -66,6 +71,7 @@ export default function RequestBlood() {
                 type="text"
                 className="w-full border p-2 rounded-sm"
                 placeholder="Phone Number "
+                onChange={handleRequestChange}
               />
             </div>
 

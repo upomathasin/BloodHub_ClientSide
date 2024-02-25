@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
 import Swal from "sweetalert2";
-import { json } from "react-router-dom";
 export default function Register() {
   const { createUser } = useContext(AuthContext);
   const [isChecked, setIsChecked] = useState(false);
@@ -15,6 +14,7 @@ export default function Register() {
       blood: e.target.group.value,
       available: e.target.available.checked,
       lastDonate: e.target.lastDonate.value,
+      status: "Active",
     };
 
     console.log(newUser);

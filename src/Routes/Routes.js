@@ -7,8 +7,11 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Main from "../Layouts/Main/Main";
 import UserProfile from "../Pages/UserProfile/UserProfile";
-import UserPrivateRoute from "../Component/UserPrivateRoute/UserPrivateRoute";
+import UserPrivateRoute from "./UserPrivateRoute/UserPrivateRoute";
 import RequestBlood from "../Pages/RequestBlood/RequestBlood";
+import AdminDash from "../Pages/AdminDash/AdminDash";
+import AdminRoute from "./AdminRoute/AdminRoute";
+import UserDash from "../Pages/UserDash/UserDash";
 
 export default function Routes({ children }) {
   const routes = createBrowserRouter([
@@ -19,6 +22,14 @@ export default function Routes({ children }) {
         {
           path: "/",
           element: <Home></Home>,
+        },
+        {
+          path: "/userDash",
+          element: (
+            <UserPrivateRoute>
+              <UserDash></UserDash>
+            </UserPrivateRoute>
+          ),
         },
         {
           path: "/about",
@@ -39,6 +50,14 @@ export default function Routes({ children }) {
         {
           path: "/requestBlood",
           element: <RequestBlood></RequestBlood>,
+        },
+        {
+          path: "/adminDash",
+          element: (
+            <AdminRoute>
+              <AdminDash></AdminDash>
+            </AdminRoute>
+          ),
         },
 
         {
