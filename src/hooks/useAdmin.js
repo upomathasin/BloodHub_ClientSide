@@ -1,12 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../providers/AuthContextProvider/AuthContextProvider";
 
 export default function useAdmin() {
-  const { user } = useContext(AuthContext);
+  const { user, isLoading } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
-  if (user?.email === "admin123@gmail.com" && user?.password === "Admin123*") {
-    setIsAdmin(true);
-  }
+
+  useEffect(() => {
+    if (user && !isLoading) {
+      fetch(`http://localhost:5000/users/admin/${user.email}`)
+        .then((res) => res.json())
+        .then((data) => setIsAdmin(data));
+    }
+  }, [user, isLoading]);
 
   return [isAdmin];
 }

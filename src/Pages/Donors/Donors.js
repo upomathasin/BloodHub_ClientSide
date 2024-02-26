@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { IoSearchCircle } from "react-icons/io5";
 
 export default function Donors() {
   const [users, setUsers] = useState([]);
@@ -12,7 +11,7 @@ export default function Donors() {
   }, []);
 
   const handleSearch = (e) => {
-    setSearchedTerm(e.target.value.toLowerCase());
+    setSearchedTerm(e.target.value);
   };
   return (
     <div>
@@ -77,52 +76,53 @@ export default function Donors() {
           </thead>
           <tbody>
             {/* row 1 */}
-
-            {users
-              .filter((user) => {
-                if (showAllusers) {
-                  return user.blood.toLowerCase().includes(searchedTerm);
-                } else {
-                  let today = new Date();
-                  let threeMonAgo = new Date();
-                  threeMonAgo.setMonth(today.getMonth() - 3);
-                  let donationDate = new Date(user.lastDonate);
-
-                  if (donationDate >= threeMonAgo) {
+            {console.log("users", users)}
+            {users &&
+              users
+                .filter((user) => {
+                  if (showAllusers) {
                     return user.blood.toLowerCase().includes(searchedTerm);
-                  }
-                }
-              })
-              .map((user) => (
-                <tr>
-                  <th>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar placeholder">
-                        <div className="bg-red-400 text-white rounded-sm w-12">
-                          <span className="text-xl">{user.blood}</span>
-                        </div>
-                      </div>
-                      <div></div>
-                    </div>
-                  </th>
+                  } else {
+                    let today = new Date();
+                    let threeMonAgo = new Date();
+                    threeMonAgo.setMonth(today.getMonth() - 3);
+                    let donationDate = new Date(user.lastDonate);
 
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phone}</td>
-                  <td>{user.lastDonate}</td>
-                  <th>
-                    <button
-                      className={` text-xl ${
-                        user.available ? "text-slate-400" : "text-slate-500"
-                      } btn-xs`}
-                    >
-                      {`${
-                        user.available ? ` ${user.location}` : "Not Available"
-                      }`}
-                    </button>
-                  </th>
-                </tr>
-              ))}
+                    if (donationDate >= threeMonAgo) {
+                      return user.blood.toLowerCase().includes(searchedTerm);
+                    }
+                  }
+                })
+                .map((user) => (
+                  <tr>
+                    <th>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar placeholder">
+                          <div className="bg-red-400 text-white rounded-sm w-12">
+                            <span className="text-xl">{user.blood}</span>
+                          </div>
+                        </div>
+                        <div></div>
+                      </div>
+                    </th>
+
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.lastDonate}</td>
+                    <th>
+                      <button
+                        className={` text-xl ${
+                          user.available ? "text-slate-400" : "text-slate-500"
+                        } btn-xs`}
+                      >
+                        {`${
+                          user.available ? ` ${user.location}` : "Not Available"
+                        }`}
+                      </button>
+                    </th>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>

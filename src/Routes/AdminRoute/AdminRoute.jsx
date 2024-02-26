@@ -2,16 +2,16 @@ import React, { useContext } from "react";
 import useAdmin from "../../hooks/useAdmin";
 import { Navigate, redirect, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
+import { UserTypeContext } from "../../providers/UserTypeProvider/UserTypeProvider";
 
 export default function AdminRoute({ children }) {
-  const [isAdmin] = useAdmin();
+  const { isAdmin } = useContext(UserTypeContext);
   const navigate = useNavigate();
   const { user, isLoading } = useContext(AuthContext);
 
-  if (user && isAdmin) {
+  if (isAdmin) {
     return children;
   }
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-base-200 flex justify-center items-center">

@@ -6,16 +6,19 @@ import Routes from "./Routes/Routes";
 import AuthContextProvider from "./providers/AuthContextProvider/AuthContextProvider";
 
 import React from "react";
+import UserTypeProvider from "./providers/UserTypeProvider/UserTypeProvider";
 
 export default function App() {
   return (
     <div>
+      {" "}
       <AuthContextProvider>
-        {" "}
-        <ParallaxProvider>
-          {" "}
-          <Routes></Routes>
-        </ParallaxProvider>
+        <UserTypeProvider>
+          <ParallaxProvider>
+            {" "}
+            <Routes></Routes>
+          </ParallaxProvider>
+        </UserTypeProvider>
       </AuthContextProvider>
     </div>
   );

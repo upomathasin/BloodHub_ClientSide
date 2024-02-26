@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import { BiDonateBlood } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
 import useAdmin from "../../hooks/useAdmin";
+import { UserTypeContext } from "../../providers/UserTypeProvider/UserTypeProvider";
 export default function Navbar() {
   const { user, isLoading, signOutUser } = useContext(AuthContext);
-  const [isAdmin] = useAdmin();
+  const { isAdmin } = useContext(UserTypeContext);
+
+  const navigate = useNavigate();
   console.log(user, isLoading);
   return (
     <div>
@@ -88,7 +91,7 @@ export default function Navbar() {
             <li>
               <Link to="/">Home</Link>
             </li>
-            {user && !isAdmin && (
+            {user && !isAdmin && isLoading && (
               <li>
                 <Link to="/userProfile/:email">Your Profile</Link>
               </li>
@@ -130,7 +133,11 @@ export default function Navbar() {
         <div className="navbar-end">
           {user && (
             <button
-              onClick={signOutUser}
+              onClick={() => {
+                alert("Logout..");
+                navigate("/");
+                signOutUser();
+              }}
               className="btn"
               style={{ color: "white", backgroundColor: "rgb(198, 65, 76)" }}
             >
