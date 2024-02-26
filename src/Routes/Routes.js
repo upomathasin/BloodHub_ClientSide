@@ -12,6 +12,8 @@ import RequestBlood from "../Pages/RequestBlood/RequestBlood";
 import AdminDash from "../Pages/AdminDash/AdminDash";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import UserDash from "../Pages/UserDash/UserDash";
+import ManageUsers from "../Pages/ManageUsers/ManageUsers";
+import AdminDashLayout from "../Layouts/AdminDashLayout/AdminDashLayout";
 
 export default function Routes({ children }) {
   const routes = createBrowserRouter([
@@ -51,14 +53,6 @@ export default function Routes({ children }) {
           path: "/requestBlood",
           element: <RequestBlood></RequestBlood>,
         },
-        {
-          path: "/adminDash",
-          element: (
-            <AdminRoute>
-              <AdminDash></AdminDash>
-            </AdminRoute>
-          ),
-        },
 
         {
           path: "/userProfile/:email",
@@ -67,6 +61,24 @@ export default function Routes({ children }) {
               <UserProfile></UserProfile>,
             </UserPrivateRoute>
           ),
+        },
+      ],
+    },
+    {
+      path: "adminDash",
+      element: (
+        <AdminRoute>
+          <AdminDashLayout></AdminDashLayout>
+        </AdminRoute>
+      ),
+      children: [
+        {
+          path: "",
+          element: <AdminDash></AdminDash>,
+        },
+        {
+          path: "manageUsers",
+          element: <ManageUsers></ManageUsers>,
         },
       ],
     },

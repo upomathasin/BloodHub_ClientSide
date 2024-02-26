@@ -6,7 +6,7 @@ import useAdmin from "../../hooks/useAdmin";
 import { UserTypeContext } from "../../providers/UserTypeProvider/UserTypeProvider";
 
 export default function Login() {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { isAdmin } = useContext(UserTypeContext);
   const handleLogin = (e) => {
@@ -22,12 +22,6 @@ export default function Login() {
           showConfirmButton: false,
           timer: 1500,
         });
-
-        if (!isAdmin) {
-          navigate(`/userProfile/${userCredential.user.email}`, {
-            state: { uid: userCredential.user.uid },
-          });
-        }
       })
       .catch((err) => {
         console.log(err.message);
@@ -39,6 +33,12 @@ export default function Login() {
           timer: 2000,
         });
       });
+
+    // if (!isAdmin) {
+    //   navigate(`/userProfile/${user.email}`, {
+    //     state: { uid: user.uid },
+    //   });
+    // }
   };
   return (
     <div

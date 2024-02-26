@@ -15,6 +15,7 @@ export default function Register() {
       available: e.target.available.checked,
       lastDonate: e.target.lastDonate.value,
       status: "Active",
+      role: "user",
     };
 
     console.log(newUser);

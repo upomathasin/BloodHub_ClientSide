@@ -9,9 +9,6 @@ export default function AdminRoute({ children }) {
   const navigate = useNavigate();
   const { user, isLoading } = useContext(AuthContext);
 
-  if (isAdmin) {
-    return children;
-  }
   if (isLoading) {
     return (
       <div className="min-h-screen bg-base-200 flex justify-center items-center">
@@ -21,6 +18,10 @@ export default function AdminRoute({ children }) {
         <span className="loading loading-bars loading-lg"></span>
       </div>
     );
+  }
+
+  if (isAdmin) {
+    return children;
   } else {
     alert("You are not an admin !");
     return <Navigate to="/"></Navigate>;
