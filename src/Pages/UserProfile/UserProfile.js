@@ -1,170 +1,68 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
-import { json, useLocation } from "react-router-dom";
+import { json, useLocation, useNavigate } from "react-router-dom";
 import { FaUserEdit } from "react-icons/fa";
+import { UserProfileContext } from "../../providers/UserProfileProvider/UserProfileProvider";
 export default function UserProfile() {
   const { user } = useContext(AuthContext);
 
-  const [userProfile, setUserProfile] = useState(null);
+  const { userProfile, refetch, isPending, error } =
+    useContext(UserProfileContext);
   const [updatedProfile, setUpdatedProfile] = useState(userProfile);
-  useEffect(() => {
-    try {
-      fetch(`http://localhost:5000/users/${user.email}`)
-        .then((res) => res.json())
-        .then((data) => setUserProfile(data));
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+  const navigate = useNavigate();
 
-  const handleUpdate = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    console.log(e.target.name, e.target.value);
-    setUpdatedProfile({ ...userProfile, [name]: value });
-  };
-
-  const handleUpdateSubmit = (e) => {
-    e.preventDefault();
-
-    console.log(updatedProfile);
-    fetch(`http://localhost:5000/users/${user.email}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(updatedProfile),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  };
   return (
-    <div>
+    <div className="hero min-h-screen bg-base-200">
       {userProfile && (
-        <div className="hero min-h-screen bg-base-200">
-          <div className="hero-content flex-col lg:flex-row">
-            <div className="flex items-center gap-3">
-              <div className="avatar placeholder">
-                <div
-                  className="bg-red-400 text-neutral-content rounded-sm w-80
-                "
-                >
-                  <h1>
-                    <span className="text-8xl text-white">
-                      {userProfile.blood}
-                    </span>
-                  </h1>
-                </div>
+        <div className="hero-content flex-col lg:flex-row justify-center items-center">
+          <div className="flex items-center gap-3">
+            <div className="avatar placeholder">
+              <div className="bg-red-400 text-neutral-content rounded-sm lg:w-80">
+                <h1>
+                  <span className="lg:text-8xl text-5xl text-white p-2">
+                    {userProfile.blood}
+                  </span>
+                </h1>
               </div>
             </div>
-            <div>
-              <h1 className="text-5xl font-bold">{userProfile.name}</h1>
-              <p className="pt-4 pb-1">
-                Blood Group:
-                <span className=" ms-1 text-red-400">{userProfile.blood}</span>
-              </p>
-              <p className="py-1">
-                Last Blood Donation Date:
-                <span className=" ms-1 ">{userProfile.lastDonate}</span>
-              </p>
-              <p className="py-1">
-                Email:
-                <span className=" ms-1 ">{userProfile.email}</span>
-              </p>
-              <p className="py-1">
-                Phone Number:
-                <span className=" ms-1">{userProfile.phone}</span>
-              </p>
-              <p className="py-1">
-                Location:
-                <span className=" ms-1">{userProfile.location}</span>
-              </p>
+          </div>
+          <div>
+            <h1 className="lg:text-5xl text-3xl font-bold">
+              {userProfile.name}
+            </h1>
+            <p className="pt-4 pb-1">
+              Blood Group:
+              <span className=" ms-1 text-red-400">{userProfile.blood}</span>
+            </p>
+            <p className="py-1">
+              Last Blood Donation Date:
+              <span className=" ms-1 ">{userProfile.lastDonate}</span>
+            </p>
+            <p className="py-1">
+              Email:
+              <span className=" ms-1 ">{userProfile.email}</span>
+            </p>
+            <p className="py-1">
+              Phone Number:
+              <span className=" ms-1">{userProfile.phone}</span>
+            </p>
+            <p className="py-1">
+              Location:
+              <span className=" ms-1">{userProfile.location}</span>
+            </p>
 
-              {/* The button to open modal */}
-              <label htmlFor="my_modal_7" className="btn">
-                Edit Profile <FaUserEdit></FaUserEdit>
-              </label>
-
-              {/* Put this part before </body> tag */}
-              <input type="checkbox" id="my_modal_7" className="modal-toggle" />
-              <div className="modal" role="dialog">
-                <div className="modal-box">
-                  <form className="dialog p-4 h-full border  bg-white m-4  border-slate-300">
-                    <h1 className="text-xl text-slate-700 text-center font-bold">
-                      Edit your Information
-                    </h1>
-                    <div className="flex justify-center items-center">
-                      <FaUserEdit className=" text-7xl text-slate-800 " />
-                    </div>{" "}
-                    <label>Your Name :</label>
-                    <br />
-                    <input
-                      type="text"
-                      placeholder="Enter Name"
-                      className=" w-full border p-2 my-2 rounded-sm"
-                      name="name"
-                      onChange={handleUpdate}
-                      defaultValue={userProfile.name}
-                    />
-                    <br />
-                    <label>Your Location:</label>
-                    <input
-                      name="location"
-                      onChange={handleUpdate}
-                      type="text"
-                      placeholder="Enter Location"
-                      className="w-full border p-2 my-2 rounded-sm"
-                      defaultValue={userProfile.location}
-                    />
-                    <br />
-                    <label>Your Last Blood Donation Date ("YYYY-MM-DD")</label>
-                    <input
-                      name="lastDonate"
-                      onChange={handleUpdate}
-                      type="text"
-                      className="w-full border p-2 my-2 rounded-sm"
-                      placeholder="YYYY-MM-DD"
-                      defaultValue={userProfile.lastDonate}
-                    />
-                    <br />
-                    <label>Your Phone Number:</label>
-                    <input
-                      name="phone"
-                      onChange={handleUpdate}
-                      type="text"
-                      placeholder="Enter Location"
-                      className="w-full border p-2 my-2 rounded-sm"
-                      defaultValue={userProfile.phone}
-                    />
-                    <div className="form-control w-full  p-2 my-2 ">
-                      <label className="cursor-pointer label">
-                        <span className="label-text">
-                          Available to donate blood
-                        </span>
-                        <input
-                          type="checkbox"
-                          name="available"
-                          //checked={isChecked}
-                          className="checkbox checkbox-error"
-                          defaultChecked={userProfile.available}
-                          // onChange={handleAvailablility}
-                        />
-                      </label>
-                    </div>
-                    <div className="flex justify-center">
-                      {" "}
-                      <button
-                        onClick={handleUpdateSubmit}
-                        className="btn btn-sm my-3  bg-slate-700 rounded-none text-white"
-                      >
-                        Update
-                      </button>
-                    </div>
-                  </form>
-                </div>
-                <label className="modal-backdrop" htmlFor="my_modal_7">
-                  Close
-                </label>
-              </div>
-            </div>
+            <button
+              onClick={() =>
+                navigate(`/userDash/updateProfile`, {
+                  state: {
+                    userProfile,
+                    refetch,
+                  },
+                })
+              }
+            >
+              Edit
+            </button>
           </div>
         </div>
       )}

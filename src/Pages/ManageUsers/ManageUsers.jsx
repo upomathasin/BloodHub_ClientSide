@@ -54,7 +54,7 @@ export default function ManageUsers() {
       </div>
       <div className="overflow-x-auto">
         <div className="overflow-x-auto border m-12 ">
-          <table className="table">
+          <table className="table  table-md">
             <thead>
               <th>
                 <div className="dropdown dropdown-hover">

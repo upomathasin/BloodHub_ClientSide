@@ -14,6 +14,8 @@ import AdminRoute from "./AdminRoute/AdminRoute";
 import UserDash from "../Pages/UserDash/UserDash";
 import ManageUsers from "../Pages/ManageUsers/ManageUsers";
 import AdminDashLayout from "../Layouts/AdminDashLayout/AdminDashLayout";
+import UserDashLayout from "../Layouts/UserDashLayout/UserDashLayout";
+import UpdateProfile from "../Component/UpdateProfile/UpdateProfile";
 
 export default function Routes({ children }) {
   const routes = createBrowserRouter([
@@ -25,14 +27,7 @@ export default function Routes({ children }) {
           path: "/",
           element: <Home></Home>,
         },
-        {
-          path: "/userDash",
-          element: (
-            <UserPrivateRoute>
-              <UserDash></UserDash>
-            </UserPrivateRoute>
-          ),
-        },
+
         {
           path: "/about",
           element: <About></About>,
@@ -53,15 +48,6 @@ export default function Routes({ children }) {
           path: "/requestBlood",
           element: <RequestBlood></RequestBlood>,
         },
-
-        {
-          path: "/userProfile/:email",
-          element: (
-            <UserPrivateRoute>
-              <UserProfile></UserProfile>,
-            </UserPrivateRoute>
-          ),
-        },
       ],
     },
     {
@@ -79,6 +65,26 @@ export default function Routes({ children }) {
         {
           path: "manageUsers",
           element: <ManageUsers></ManageUsers>,
+        },
+      ],
+    },
+
+    {
+      path: "/userDash",
+      element: (
+        <UserPrivateRoute>
+          <UserDashLayout></UserDashLayout>
+        </UserPrivateRoute>
+      ),
+
+      children: [
+        {
+          path: "userProfile/:email",
+          element: <UserProfile></UserProfile>,
+        },
+        {
+          path: "updateProfile",
+          element: <UpdateProfile></UpdateProfile>,
         },
       ],
     },

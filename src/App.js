@@ -6,19 +6,29 @@ import Routes from "./Routes/Routes";
 import AuthContextProvider from "./providers/AuthContextProvider/AuthContextProvider";
 
 import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import UserProfile from "./Pages/UserProfile/UserProfile";
 import UserTypeProvider from "./providers/UserTypeProvider/UserTypeProvider";
+import UserProfileProvider from "./providers/UserProfileProvider/UserProfileProvider";
 
 export default function App() {
+  const Client = new QueryClient();
   return (
     <div>
       {" "}
       <AuthContextProvider>
-        <UserTypeProvider>
-          <ParallaxProvider>
+        <QueryClientProvider client={Client}>
+          <UserTypeProvider>
             {" "}
-            <Routes></Routes>
-          </ParallaxProvider>
-        </UserTypeProvider>
+            <UserProfileProvider>
+              {" "}
+              <ParallaxProvider>
+                {" "}
+                <Routes></Routes>
+              </ParallaxProvider>
+            </UserProfileProvider>
+          </UserTypeProvider>
+        </QueryClientProvider>
       </AuthContextProvider>
     </div>
   );
