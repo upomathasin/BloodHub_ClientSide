@@ -16,6 +16,7 @@ import ManageUsers from "../Pages/ManageUsers/ManageUsers";
 import AdminDashLayout from "../Layouts/AdminDashLayout/AdminDashLayout";
 import UserDashLayout from "../Layouts/UserDashLayout/UserDashLayout";
 import UpdateProfile from "../Component/UpdateProfile/UpdateProfile";
+import NoBlockUserPrivateRoute from "./NonBlockUserPrivateRoute.jsx/NoBlockUserPrivateRoute";
 
 export default function Routes({ children }) {
   const routes = createBrowserRouter([
@@ -43,10 +44,6 @@ export default function Routes({ children }) {
         {
           path: "/register",
           element: <Register></Register>,
-        },
-        {
-          path: "/requestBlood",
-          element: <RequestBlood></RequestBlood>,
         },
       ],
     },
@@ -78,6 +75,14 @@ export default function Routes({ children }) {
       ),
 
       children: [
+        {
+          path: "requestBlood",
+          element: (
+            <NoBlockUserPrivateRoute>
+              <RequestBlood></RequestBlood>
+            </NoBlockUserPrivateRoute>
+          ),
+        },
         {
           path: "userProfile/:email",
           element: <UserProfile></UserProfile>,

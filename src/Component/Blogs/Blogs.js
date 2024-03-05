@@ -24,9 +24,10 @@ export default function Blogs() {
 
   return (
     <div className="p-10">
-      <div>
+      <div className=" flex  flex-col justify-center items-center">
         {" "}
-        <h1 className="text-5xl text-center uppercase">Blogs</h1>
+        <h1 className="text-5xl text-slate-900 text-center uppercase">Blogs</h1>
+        <p className="text-2xl text-slate-600">Join our community of donors </p>
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-3  gap-4 my-10">
         {Blogs.map((blog) => {

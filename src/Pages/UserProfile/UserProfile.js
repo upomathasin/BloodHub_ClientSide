@@ -61,7 +61,10 @@ export default function UserProfile() {
                 })
               }
             >
-              Edit
+              <div className="flex justify-center items-center text-2xl space-x-1">
+                {" "}
+                <h1>Edit</h1> <FaUserEdit></FaUserEdit>
+              </div>
             </button>
           </div>
         </div>

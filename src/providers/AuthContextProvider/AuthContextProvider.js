@@ -7,30 +7,32 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Swal from "sweetalert2";
 export const AuthContext = createContext(null);
 export default function AuthContextProvider({ children }) {
   const auth = getAuth(app);
-  const [isLoading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, loading, error] = useAuthState(auth);
+  // const [isLoading, setLoading] = useState(true);
+  // const [user, setUser] = useState(null);
 
   const createUser = async (email, password) => {
-    setLoading(true);
+    //setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
+  //     setLoading(false);
+  //   });
 
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
   const signInUser = async (email, password) => {
-    setLoading(true);
+    // setLoading(true);
 
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -41,8 +43,8 @@ export default function AuthContextProvider({ children }) {
     user: user,
     createUser: createUser,
     signInUser: signInUser,
-    isLoading: isLoading,
-    setLoading: setLoading,
+    isLoading: loading,
+
     signOutUser: signOutUser,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
