@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
+import { Link } from "react-router-dom";
 
 export default function NoBlockUserPrivateRoute({ children }) {
   const { user, isLoading } = useContext(AuthContext);
@@ -49,7 +50,7 @@ export default function NoBlockUserPrivateRoute({ children }) {
             more information.
           </p>
           <button className="btn bg-red-400 text-white hover:bg-red-500">
-            Back To Home
+            <Link to="/">Back To Home</Link>
           </button>
         </div>
       </div>

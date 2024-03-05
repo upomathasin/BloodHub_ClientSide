@@ -67,7 +67,7 @@ export default function Routes({ children }) {
     },
 
     {
-      path: "/userDash",
+      path: "userDash",
       element: (
         <UserPrivateRoute>
           <UserDashLayout></UserDashLayout>
@@ -75,6 +75,14 @@ export default function Routes({ children }) {
       ),
 
       children: [
+        {
+          path: "",
+          element: (
+            <UserPrivateRoute>
+              <UserDash></UserDash>
+            </UserPrivateRoute>
+          ),
+        },
         {
           path: "requestBlood",
           element: (

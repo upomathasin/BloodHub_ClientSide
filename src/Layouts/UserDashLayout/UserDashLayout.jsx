@@ -73,7 +73,7 @@ export default function UserDashLayout() {
                 </Link>
               </li>
               <li>
-                <a>Sidebar Item 2</a>
+                <Link to={`/userDash/requestBlood`}> Request Blood</Link>
               </li>
             </ul>
           </div>
@@ -96,7 +96,7 @@ export default function UserDashLayout() {
             </Link>
           </li>
           <li>
-            <a>Sidebar Item 2</a>
+            <Link to={`/userDash/requestBlood`}> Request Blood</Link>
           </li>
         </ul>
       </div>

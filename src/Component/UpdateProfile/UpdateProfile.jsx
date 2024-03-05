@@ -32,7 +32,7 @@ export default function UpdateProfile() {
   };
   return (
     <div className="flex  justify-center items-center">
-      <form className="dialog p-5  lg:w-[500px] h-[580px] border  bg-white m-4  border-slate-300">
+      <form className="dialog p-5  lg:w-[500px] h-[580px] border shadow-sm  bg-white m-4  border-slate-300">
         <h1 className="text-xl text-slate-700 text-center font-bold">
           Edit your Information
         </h1>
