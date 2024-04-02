@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiSolidDonateBlood } from "react-icons/bi";
+import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
 export default function RequestBlood() {
+  const { user } = useContext(AuthContext);
   const [bloodRequest, setBloodRequest] = useState({
     blood: "",
     location: "",
     date: "",
     phone: "",
+    requestedBy: user?.email,
   });
 
-  const handleRequestChange = (e) => {};
+  const handleRequestChange = (e) => {
+    const request = {
+      ...bloodRequest,
+      [e.target.name]: e.target.value,
+    };
+    setBloodRequest(request);
+  };
+
+  const handleRequest = async (e) => {
+    e.preventDefault();
+    await fetch(`http://localhost:5000/users/bloodRequest`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bloodRequest),
+    });
+  };
 
   return (
-    <div className="bg-base-200">
+    <div className="bg-base-200 p-8">
       <div className="hero min-h-screen ">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">
@@ -74,6 +94,7 @@ export default function RequestBlood() {
 
               <div className="form-control mt-6">
                 <button
+                  onClick={handleRequest}
                   className="btn text-white rounded-none"
                   style={{ backgroundColor: "rgb(198, 65, 76)" }}
                 >
@@ -83,10 +104,6 @@ export default function RequestBlood() {
             </form>
           </div>
         </div>
-      </div>
-
-      <div className="hero min-h-screen ">
-        <h1 className="h1"> Donation Blood Requests</h1>
       </div>
     </div>
   );

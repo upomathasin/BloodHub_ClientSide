@@ -17,6 +17,7 @@ import AdminDashLayout from "../Layouts/AdminDashLayout/AdminDashLayout";
 import UserDashLayout from "../Layouts/UserDashLayout/UserDashLayout";
 import UpdateProfile from "../Component/UpdateProfile/UpdateProfile";
 import NoBlockUserPrivateRoute from "./NonBlockUserPrivateRoute.jsx/NoBlockUserPrivateRoute";
+import MyRequests from "../Pages/MyRequests/MyRequests";
 
 export default function Routes({ children }) {
   const routes = createBrowserRouter([
@@ -98,6 +99,11 @@ export default function Routes({ children }) {
         {
           path: "updateProfile",
           element: <UpdateProfile></UpdateProfile>,
+        },
+        ,
+        {
+          path: "myRequests",
+          element: <MyRequests></MyRequests>,
         },
       ],
     },

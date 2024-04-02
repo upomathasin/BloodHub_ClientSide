@@ -8,7 +8,7 @@ export default function AdminDash() {
         style={{
           backgroundImage: `url(https://mydr.com.au/wp-content/uploads/2019/04/blood_donation_transfusion_750.jpg)`,
         }}
-        className="hero min-h-screen    "
+        className="hero min-h-screen   bg-opacity-40 "
       >
         <div className="hero-overlay bg-opacity-60 bg-slate-900"></div>
         <div className="hero-content text-center text-neutral-content">

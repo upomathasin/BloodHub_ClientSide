@@ -42,9 +42,6 @@ export default function Navbar() {
                 <Link to="/findDonors">Find Donors</Link>
               </li>
 
-              <li>
-                <Link to="/requestBlood">Request Blood</Link>
-              </li>
               {user && !isAdmin && (
                 <li>
                   <Link to="/userProfile/:email">Your Profile</Link>
@@ -100,9 +97,6 @@ export default function Navbar() {
               <Link to="/findDonors">Find Donors</Link>
             </li>
 
-            <li>
-              <Link to="/requestBlood">Request Blood</Link>
-            </li>
             {user && isAdmin && (
               <li>
                 <Link to="/adminDash"> Admin Dash</Link>
