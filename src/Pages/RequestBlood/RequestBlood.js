@@ -1,14 +1,18 @@
 import React, { useContext, useState } from "react";
 import { BiSolidDonateBlood } from "react-icons/bi";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 export default function RequestBlood() {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [bloodRequest, setBloodRequest] = useState({
     blood: "",
     location: "",
     date: "",
     phone: "",
     requestedBy: user?.email,
+    status: "pending",
   });
 
   const handleRequestChange = (e) => {
@@ -27,7 +31,19 @@ export default function RequestBlood() {
         "content-type": "application/json",
       },
       body: JSON.stringify(bloodRequest),
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Blood request successfully submitted !",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        navigate("/userDash/myRequests");
+      });
   };
 
   return (
