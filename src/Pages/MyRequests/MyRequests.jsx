@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function MyRequests() {
   const { user } = useContext(AuthContext);
@@ -15,11 +16,38 @@ export default function MyRequests() {
   }, [user]);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/myRequests/${id}`, {
+    fetch(`http://localhost:5000/myRequest/${id}`, {
       method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
     })
       .then((res) => res.json())
-      .then((data) => alert("Deleted Request"));
+      .then((data) => {
+        if (data.deletedCount == 1) {
+          Swal.fire("Request has been deleted successfully !");
+          const newReq = requests?.filter((request) => request._id != id);
+          setRequests(newReq);
+        }
+      });
+  };
+
+  const handleEdit = (status, id) => {
+    console.log(status, id);
+
+    fetch(`http://localhost:5000/myRequest/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: status }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          Swal.fire("Status of Request successfully Updated");
+        }
+      });
   };
   return (
     <div className="min-h-screen flex flex-col justify-center items-center p-8">
@@ -39,7 +67,7 @@ export default function MyRequests() {
           </div>
         )}
       </div>
-      {requests.length != 0 && (
+      {requests.length !== 0 && (
         <div className="overflow-x-auto w-full">
           <table className="table">
             {/* head */}
@@ -59,20 +87,30 @@ export default function MyRequests() {
               {requests.length != 0 &&
                 requests.map((request, index) => {
                   return (
-                    <tr key={request.id}>
+                    <tr key={request._id}>
                       <th>{index + 1}</th>
                       <td>{request.date.toString()}</td>
                       <td>{request.phone}</td>
                       <td>{request.blood}</td>
                       <td>{request.location}</td>
                       <td>
-                        <button className=" btn btn-sm btn-error text-white">
-                          {request.status}
-                        </button>
+                        <select
+                          name="status"
+                          onChange={(e) =>
+                            handleEdit(e.target.value, request._id)
+                          }
+                          className="select  select-sm w-full max-w-xs"
+                        >
+                          <option disabled selected>
+                            {request.status}
+                          </option>
+                          <option defaultValue="managed">managed</option>
+                          <option defaultValue="pending">pending</option>
+                        </select>
                       </td>
                       <th>
                         <button
-                          onClick={() => handleDelete(request.id)}
+                          onClick={() => handleDelete(request._id)}
                           className="text-center"
                         >
                           X
