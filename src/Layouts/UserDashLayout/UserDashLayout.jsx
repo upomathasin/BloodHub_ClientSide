@@ -5,6 +5,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaHome, FaUserCircle } from "react-icons/fa";
 import { BiDonateBlood } from "react-icons/bi";
 import { MdBloodtype } from "react-icons/md";
+import { TbUser } from "react-icons/tb";
+
 export default function UserDashLayout() {
   const { user } = useContext(AuthContext);
 
@@ -24,10 +26,17 @@ export default function UserDashLayout() {
           ></label>
           <ul className=" lg:w-80  sm:w-60  h-full menu py-4  bg-slate-700 text-white">
             {/* Sidebar content here */}
+
             <li>
               <Link to={`/`}>
                 {" "}
                 <FaHome></FaHome> Home
+              </Link>
+            </li>
+            <li>
+              <Link to={`/userDash`}>
+                {" "}
+                <TbUser></TbUser>Welcome Page
               </Link>
             </li>
             <li>

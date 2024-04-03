@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserProfileContext } from "../../providers/UserProfileProvider/UserProfileProvider";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
 
@@ -31,8 +31,8 @@ export default function UpdateProfile() {
       });
   };
   return (
-    <div className="flex  justify-center items-center">
-      <form className="dialog p-5  lg:w-[500px] h-[580px] border shadow-sm  bg-white m-4  border-slate-300">
+    <div className="flex  justify-center items-center  ">
+      <form className=" m-8   border border-slate-400  lg:p-5 p-3  lg:w-[500px] h-[580px]  shadow-sm  bg-white  border-spacing-2">
         <h1 className="text-xl text-slate-700 text-center font-bold">
           Edit your Information
         </h1>
@@ -79,7 +79,7 @@ export default function UpdateProfile() {
           className="w-full border p-2 my-2 rounded-sm"
           defaultValue={userProfile.phone}
         />
-        <div className="form-control w-full  p-2 my-2 ">
+        <div className="form-control w-full  p-2 lg:my-2 ">
           <label className="cursor-pointer label">
             <span className="label-text">Available to donate blood</span>
             <input

@@ -3,6 +3,7 @@ import { BiSolidDonateBlood } from "react-icons/bi";
 import { AuthContext } from "../../providers/AuthContextProvider/AuthContextProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+
 export default function RequestBlood() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -41,8 +42,6 @@ export default function RequestBlood() {
           showConfirmButton: false,
           timer: 1500,
         });
-
-        navigate("/userDash/myRequests");
       });
   };
 

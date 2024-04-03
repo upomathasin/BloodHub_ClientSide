@@ -15,9 +15,10 @@ import UserDash from "../Pages/UserDash/UserDash";
 import ManageUsers from "../Pages/ManageUsers/ManageUsers";
 import AdminDashLayout from "../Layouts/AdminDashLayout/AdminDashLayout";
 import UserDashLayout from "../Layouts/UserDashLayout/UserDashLayout";
-import UpdateProfile from "../Component/UpdateProfile/UpdateProfile";
+
 import NoBlockUserPrivateRoute from "./NonBlockUserPrivateRoute.jsx/NoBlockUserPrivateRoute";
 import MyRequests from "../Pages/MyRequests/MyRequests";
+import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 
 export default function Routes({ children }) {
   const routes = createBrowserRouter([
