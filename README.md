@@ -15,10 +15,9 @@ Blood Hub is a comprehensive blood donation platform aimed at connecting donors 
 - MongoDB
 
 ## Installation
-1. Clone the repository: `git clone [git@github.com:upomathasin/BloodHub_ClientSide.git]`
+1. Clone the repository: `git clone git@github.com:upomathasin/BloodHub_ClientSide.git`
 2. Install dependencies: `npm install`
 3. Start the development server: `npm start`
-
 ## Live Demo
 Check out the live demo [here](https://blood-hub-client-side-s3hg-p4flgphrc-upomathasins-projects.vercel.app/).
 
