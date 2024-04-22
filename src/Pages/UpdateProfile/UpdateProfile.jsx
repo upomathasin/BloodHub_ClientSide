@@ -19,11 +19,14 @@ export default function UpdateProfile() {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch(`http://localhost:5000/users/updateProfile/${user.email}`, {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(updatedProfile),
-    })
+    await fetch(
+      `https://blood-hub-serverside-c6ln.vercel.app/users/updateProfile/${user.email}`,
+      {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(updatedProfile),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         alert("Updated Profile !!");

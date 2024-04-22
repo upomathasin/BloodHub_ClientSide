@@ -30,7 +30,7 @@ export default function Register() {
         });
         console.log(userCredential);
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://blood-hub-serverside-c6ln.vercel.app/users", {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(newUser),

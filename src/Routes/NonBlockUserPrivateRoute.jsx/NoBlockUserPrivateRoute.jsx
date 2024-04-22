@@ -9,7 +9,9 @@ export default function NoBlockUserPrivateRoute({ children }) {
   useEffect(() => {
     const checkIsBlocked = async () => {
       if (user) {
-        await fetch(`http://localhost:5000/users/checkStatus/${user.email}`)
+        await fetch(
+          `https://blood-hub-serverside-c6ln.vercel.app/users/checkStatus/${user.email}`
+        )
           .then((res) => res.json())
           .then((data) => {
             setIsBlock(data);

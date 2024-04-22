@@ -26,13 +26,16 @@ export default function RequestBlood() {
 
   const handleRequest = async (e) => {
     e.preventDefault();
-    await fetch(`http://localhost:5000/users/bloodRequest`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(bloodRequest),
-    })
+    await fetch(
+      `https://blood-hub-serverside-c6ln.vercel.app/users/bloodRequest`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(bloodRequest),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         Swal.fire({

@@ -16,13 +16,16 @@ export default function ManageUsers() {
   }, [users]);
 
   const handleChangeRole = async (user, newRole) => {
-    await fetch(`http://localhost:5000/users/${user.email}/changeRole`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ updatedRole: newRole }),
-    })
+    await fetch(
+      `https://blood-hub-serverside-c6ln.vercel.app/${user.email}/changeRole`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ updatedRole: newRole }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -31,13 +34,16 @@ export default function ManageUsers() {
   };
   const handleStatusChange = async (user) => {
     let updatedStatus = user.status == "Active" ? "Block" : "Active";
-    await fetch(`http://localhost:5000/users/${user.email}/changeStatus`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ updatedStatus: updatedStatus }),
-    })
+    await fetch(
+      `https://blood-hub-serverside-c6ln.vercel.app/${user.email}/changeStatus`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ updatedStatus: updatedStatus }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

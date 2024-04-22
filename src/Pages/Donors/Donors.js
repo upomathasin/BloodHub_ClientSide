@@ -5,7 +5,7 @@ export default function Donors() {
   const [searchedTerm, setSearchedTerm] = useState("");
   const [showAllusers, setShowAllUsers] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://blood-hub-serverside-c6ln.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);

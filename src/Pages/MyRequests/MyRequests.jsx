@@ -7,7 +7,9 @@ export default function MyRequests() {
   const { user } = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/myRequests/${user.email}`)
+    fetch(
+      `https://blood-hub-serverside-c6ln.vercel.app/myRequests/${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log("My requests", data);
@@ -16,7 +18,7 @@ export default function MyRequests() {
   }, [user]);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/myRequest/${id}`, {
+    fetch(`https://blood-hub-serverside-c6ln.vercel.app/myRequest/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -35,7 +37,7 @@ export default function MyRequests() {
   const handleEdit = (status, id) => {
     console.log(status, id);
 
-    fetch(`http://localhost:5000/myRequest/${id}`, {
+    fetch(`https://blood-hub-serverside-c6ln.vercel.app/myRequest/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
